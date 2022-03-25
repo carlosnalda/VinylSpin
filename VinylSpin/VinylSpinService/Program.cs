@@ -11,8 +11,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<VinylSpinContext>(
-    dbContextOptions => dbContextOptions.UseSqlite(
-        builder.Configuration["ConnectionStrings:VinylDBConnectionString"]));
+    dbContextOptions => dbContextOptions.UseSqlServer(
+        builder.Configuration["ConnectionStrings:VinylDBConnectionStringSqlServer"]));
+
+builder.Services.AddDbContext<VinylSpinContext>(
+    dbContextOptions => dbContextOptions.UseSqlServer(
+        builder.Configuration["ConnectionStrings:VinylDBConnectionStringSqlServer"]));
 
 var app = builder.Build();
 

@@ -8,7 +8,7 @@ namespace VinylSpinService.Data
         public Guid ArtistId { get; set; }
         public Artist? Artist { get; set; }
         [Required]
-        public DateOnly Released { get; set; }
+        public DateTime Released { get; set; }
         [Required]
         public byte Rating { get; set; }
         [Required]
