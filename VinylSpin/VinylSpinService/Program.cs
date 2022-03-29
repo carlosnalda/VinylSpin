@@ -1,5 +1,7 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using VinylSpinService.Data;
+using VinylSpinService.Logic.VinylLogic;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<VinylSpinContext>(
 builder.Services.AddDbContext<VinylSpinContext>(
     dbContextOptions => dbContextOptions.UseSqlServer(
         builder.Configuration["ConnectionStrings:VinylDBConnectionStringSqlServer"]));
+
+builder.Services.AddMediatR(typeof(VinylList.Handler).Assembly);
 
 var app = builder.Build();
 

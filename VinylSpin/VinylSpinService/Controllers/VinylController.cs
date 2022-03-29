@@ -1,15 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using VinylSpinService.Data;
+using VinylSpinService.Logic.VinylLogic;
 
 namespace VinylSpinService.Controllers
 {
-    [ApiController]
     [Route("api/Vinyles")]
-    public class VinylController : ControllerBase
+    public class VinylController : BaseController
     {
+        public VinylController(IMediator mediator) : base(mediator)
+        {
+        }
+
         [HttpGet]
-        public JsonResult GetVinyles() => new(new List<object> {
-                new { id = 1, Name = "Low" },
-                new { id = 1, Name = "Reality" }
-            });
+        public async Task<ActionResult<List<Vinyl>>> GetActivities()
+        {
+            return await _mediator.Send(new VinylList.Query());
+        }
     }
 }
